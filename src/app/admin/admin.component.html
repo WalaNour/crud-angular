@@ -1,0 +1,156 @@
+<button (click)="toggle(1)">crud</button>
+<button (click)="toggle(0)">orders</button>
+
+<div *ngIf="crud">
+  <div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">Add</label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        readonly
+        class="form-control-plaintext"
+        id="staticEmail"
+        value="you can add product"
+      />
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputPassword" #name />
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">image</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputPassword" #image />
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label"
+      >desription</label
+    >
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputPassword" #desription />
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">price</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="inputPassword" #price />
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">number</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="inputPassword" #number />
+    </div>
+  </div>
+  <a
+    (click)="add(name.value, desription.value, image.value, price.value, number.value)"
+    class="card-link"
+    >add</a
+  >
+
+  <div class="card" style="width: 18rem;" *ngFor="let e of products">
+    <img src="{{e?.image}}" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">{{e?.name}}</h5>
+      <p class="card-text">
+        {{e?.description}}
+      </p>
+      <h3>{{e?.description}} dt</h3>
+      <h3>{{e?.number}} dt</h3>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <input type="text" #name value="{{e?.name}}" />
+      </li>
+      <li class="list-group-item">
+        <input type="text" #image value="{{e?.image}}" />
+      </li>
+      <li class="list-group-item">
+        <input type="text" #desription value="{{e?.desription}}" />
+      </li>
+      <li class="list-group-item">
+        <input type="number" #price value="{{e?.price}}" />
+      </li>
+      <li class="list-group-item">
+        <input type="number" #number value="{{e?.number}}" />
+      </li>
+    </ul>
+    <div class="card-body">
+      <a (click)="delete(e._id)" class="card-link">delete</a>
+      <a
+        (click)="update(name.value, desription.value, image.value, price.value, number.value, e._id)"
+        class="card-link"
+        >update</a
+      >
+    </div>
+  </div>
+</div>
+<div *ngIf="orders">
+  <table>
+    <tr>
+      <th>client</th>
+      <th>client phone</th>
+      <th>orders total</th>
+      <th>delete</th>
+    </tr>
+    <tr *ngFor="let i of dataOrders">
+      <td>{{i?.username}}</td>
+      <td>{{i?.number}}</td>
+      <td>{{i?.total}}dt</td>
+      <td>
+        <button (click)="deleteOrder(i._id)">delete</button
+        ><button (click)="fullOrder(i)">full order</button>
+      </td>
+    </tr>
+    <div id="newsletter" class="w3-modal" style="display: none;">
+      <div class="w3-modal-content w3-animate-zoom" style="padding: 32px;">
+        <div class="w3-container w3-white w3-center">
+          <i
+            onclick="document.getElementById('newsletter').style.display='none'"
+            class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"
+          ></i>
+          <h2 class="w3-wide">order</h2>
+          <p>
+            username: {{ oneOrder?.username}}
+          </p>
+          <p>
+            createdAt: {{ oneOrder?.createdAt}}
+          </p>
+          <p>
+            address: {{ oneOrder?.address}}
+          </p>
+          <p>
+            number: {{ oneOrder?.number}}
+          </p>
+          <p>
+            total: {{ oneOrder?.total}}
+          </p>
+
+          <table>
+            <tr>
+              <th>Product</th>
+              <th>Number of items</th>
+              <th>Price</th>
+            </tr>
+            <tr *ngFor="let i of list">
+              <td>{{i.name}}</td>
+              <td>{{i.price}}</td>
+              <td>{{i.price}}dt</td>
+            </tr>
+          </table>
+          <button
+            type="button"
+            class="w3-button w3-padding-large w3-red w3-margin-bottom"
+            onclick="document.getElementById('newsletter').style.display='none'"
+          >
+            close
+          </button>
+        </div>
+      </div>
+    </div>
+  </table>
+</div>

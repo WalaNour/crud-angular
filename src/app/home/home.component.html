@@ -1,0 +1,11 @@
+<div class="card" *ngFor="let p of products">
+  <h1>{{ p?.name }}</h1>
+  <img style="width: 300px; height: 300px" src="{{ p?.image }}" />
+  <button (click)="delete(p._id)">delete</button>
+  <button (click)="update(p._id, { name: name.value, image: image.value })">delete</button>
+
+</div>
+
+<input type="text" #name />
+<input type="text" #image />
+<button (click)="insert({ name: name.value, image: image.value })">add</button>
